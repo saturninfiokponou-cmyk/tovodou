@@ -1,32 +1,41 @@
 <!DOCTYPE html>
-<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>ADMIN TOVODOU</title>
-<style>body{font-family:Arial;background:#111;color:#fff;padding:20px}.card{background:#222;padding:20px;border-radius:12px;max-width:400px;margin:auto;border:2px solid #ff8c00} input{width:95%;padding:12px;margin:8px 0;border-radius:8px;border:none} button{background:#00ff88;color:#000;padding:15px;width:100%;border:none;border-radius:10px;font-weight:bold;font-size:18px;margin-top:10px} #lien{word-break:break-all;background:#000;padding:15px;border-radius:8px;margin-top:15px;border:1px dashed #ff8c00;display:none}</style>
-</head><body>
-<h2 style="text-align:center">ADMIN TOVODOU - Générateur de lien</h2>
-<div class="card">
-<input id="ch" type="number" placeholder="Nombre de chambres ex: 2" value="1">
-<input id="prix" type="number" placeholder="Prix que TU fixes ex: 70000">
-<input id="tel" placeholder="Numéro client ex: 90 12 34 56">
-<button onclick="generer()">GÉNÉRER LE LIEN DE PAIEMENT</button>
-<div id="lien"></div>
-<button id="btnW" style="display:none;background:#25D366" onclick="envoyerWA()">ENVOYER SUR WHATSAPP</button>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADMIN - SAINT-MICHEL</title>
+<style>
+body{font-family:Arial;background:#0f172a;color:white;display:flex;justify-content:center;padding:20px}
+.box{background:white;color:black;padding:25px;border-radius:15px;width:100%;max-width:400px}
+input{width:100%;padding:12px;margin:8px 0;border:1px solid #ccc;border-radius:8px;box-sizing:border-box}
+button{width:100%;padding:15px;background:#2563eb;color:white;border:none;border-radius:8px;font-weight:bold;cursor:pointer;margin-top:10px}
+#result{margin-top:15px;padding:15px;background:#f1f5f9;border-radius:8px;word-break:break-all;display:none}
+</style>
+</head>
+<body>
+<div class="box">
+<h2 style="text-align:center">SAINT-MICHEL</h2>
+<p style="text-align:center">Générateur de lien de paiement</p>
+<label>Nombre de chambres</label>
+<input id="ch" type="number" value="1">
+<label>Prix total (FCFA)</label>
+<input id="prix" type="number" value="70000">
+<label>Téléphone client (sans 228)</label>
+<input id="tel" placeholder="90 00 00 00">
+<button onclick="generer()">GÉNÉRER LE LIEN</button>
+<div id="result"></div>
 </div>
 <script>
-let lienFinal = "";
 function generer(){
-  let ch = document.getElementById('ch').value || 1;
-  let prix = document.getElementById('prix').value;
-  let tel = document.getElementById('tel').value;
-  if(!prix){ alert("Mets le prix que tu veux qu'il paye!"); return; }
-  lienFinal = `https://tovodou.onrender.com/payer.html?ch=${ch}&prix=${prix}&tel=${tel.replace(/\s/g,'')}`;
-  document.getElementById('lien').style.display='block';
-  document.getElementById('lien').innerHTML = `<b>Lien à envoyer au client:</b><br><br>${lienFinal}`;
-  document.getElementById('btnW').style.display='block';
+ let c=document.getElementById('ch').value;
+ let p=document.getElementById('prix').value;
+ let t=document.getElementById('tel').value;
+ let lien="https://tovodou.onrender.com/payer.html?chambres="+c+"&prix="+p+"&tel="+t;
+ let msg="Bonjour, l'Hôtel SAINT-MICHEL vous envoie votre lien de paiement: "+lien;
+ let wa="https://wa.me/228"+t.replace(/\s/g,'')+"?text="+encodeURIComponent(msg);
+ document.getElementById('result').style.display='block';
+ document.getElementById('result').innerHTML="<b>Lien client:</b><br>"+lien+"<br><br><a href='"+wa+"' target='_blank'><button>ENVOYER SUR WHATSAPP</button></a>";
 }
-function envoyerWA(){
-  let tel = document.getElementById('tel').value.replace(/\s/g,'');
-  let msg = `Bonjour, voici votre lien de paiement TOVODOU: ${lienFinal}. Remplissez votre nom et code promo TIK1 si vous avez (-5%) puis payez. Merci!`;
-  window.open(`https://wa.me/228${tel.substring(tel.length-8)}?text=`+encodeURIComponent(msg), '_blank');
-}
-</script></body></html>
+</script>
+</body>
+</html>
