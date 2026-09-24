@@ -1,40 +1,26 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ADMIN - SAINT-MICHEL</title>
-<style>
-body{font-family:Arial;background:#0f172a;color:white;display:flex;justify-content:center;padding:20px}
-.box{background:white;color:black;padding:25px;border-radius:15px;width:100%;max-width:400px}
-input{width:100%;padding:12px;margin:8px 0;border:1px solid #ccc;border-radius:8px;box-sizing:border-box}
-button{width:100%;padding:15px;background:#2563eb;color:white;border:none;border-radius:8px;font-weight:bold;cursor:pointer;margin-top:10px}
-#result{margin-top:15px;padding:15px;background:#f1f5f9;border-radius:8px;word-break:break-all;display:none}
-</style>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ADMIN SAINT-MICHEL</title>
+<style>body{font-family:Arial;background:#0f172a;display:flex;justify-content:center;padding:20px} .box{background:white;padding:25px;border-radius:15px;width:100%;max-width:400px} input{width:100%;padding:12px;margin:8px 0;border:1px solid #ccc;border-radius:8px} button{width:100%;padding:15px;background:#2563eb;color:white;border:none;border-radius:8px;font-weight:bold}</style>
 </head>
 <body>
 <div class="box">
 <h2 style="text-align:center">SAINT-MICHEL</h2>
-<p style="text-align:center">Générateur de lien de paiement</p>
-<label>Nombre de chambres</label>
-<input id="ch" type="number" value="1">
-<label>Prix total (FCFA)</label>
-<input id="prix" type="number" value="70000">
-<label>Téléphone client (sans 228)</label>
-<input id="tel" placeholder="90 00 00 00">
-<button onclick="generer()">GÉNÉRER LE LIEN</button>
-<div id="result"></div>
+<input id="ch" type="number" value="1" placeholder="Nombre chambres">
+<input id="prix" type="number" value="70000" placeholder="Prix total">
+<input id="tel" type="number" placeholder="Numéro client 90xxxxxx">
+<button onclick="generer()">GENERER</button>
+<div id="r" style="margin-top:15px;word-break:break-all"></div>
 </div>
 <script>
 function generer(){
  let c=document.getElementById('ch').value;
  let p=document.getElementById('prix').value;
  let t=document.getElementById('tel').value;
- let lien="https://tovodou.onrender.com/payer.html?chambres="+c+"&prix="+p+"&tel="+t;
- let msg="Bonjour, l'Hôtel SAINT-MICHEL vous envoie votre lien de paiement: "+lien;
- let wa="https://wa.me/228"+t.replace(/\s/g,'')+"?text="+encodeURIComponent(msg);
- document.getElementById('result').style.display='block';
- document.getElementById('result').innerHTML="<b>Lien client:</b><br>"+lien+"<br><br><a href='"+wa+"' target='_blank'><button>ENVOYER SUR WHATSAPP</button></a>";
+ let lien="https://tovodou.onrender.com/payer.html?chambres="+c+"&prix="+p;
+ let msg="Bonjour, ici Hotel SAINT-MICHEL. Voici votre lien de paiement: "+lien+" Montant: "+p+" FCFA. Merci de payer sur 97 39 64 79 puis envoyer la preuve ici.";
+ let wa="https://wa.me/228"+t+"?text="+encodeURIComponent(msg);
+ document.getElementById('r').innerHTML="<b>Lien:</b><br>"+lien+"<br><br><a href='"+wa+"' target='_blank'><button>ENVOYER SUR WHATSAPP</button></a>";
 }
 </script>
 </body>
