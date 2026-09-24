@@ -3,29 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paiement - SAINT-MICHEL</title>
+<title>SAINT-MICHEL - Paiement</title>
 <style>
-body{font-family:Arial;background:#f8fafc;display:flex;justify-content:center;padding:20px}
-.card{background:white;padding:25px;border-radius:15px;max-width:400px;width:100%;box-shadow:0 4px 15px rgba(0,0,0,0.1);text-align:center}
-.price{font-size:36px;font-weight:bold;color:#1e40af;margin:10px 0}
-.btn{background:#ffcc00;color:black;padding:16px;display:block;border-radius:10px;text-decoration:none;font-weight:bold;margin-top:20px;font-size:16px}
+body{font-family:Arial;background:#f1f5f9;display:flex;justify-content:center;padding:15px}
+.card{background:white;padding:25px;border-radius:20px;max-width:380px;width:100%;text-align:center;box-shadow:0 10px 25px rgba(0,0,0,0.1)}
+.price{font-size:38px;font-weight:900;color:#1e40af}
+.btn{display:block;background:#2563eb;color:white;padding:18px;border-radius:12px;text-decoration:none;font-weight:bold;margin-top:20px}
+.btn2{display:block;background:#ffcc00;color:black;padding:16px;border-radius:12px;text-decoration:none;font-weight:bold;margin-top:12px}
 </style>
 </head>
 <body>
 <div class="card">
-<h1 style="margin-bottom:0">SAINT-MICHEL</h1>
-<p style="margin-top:5px;color:#64748b">Hôtel - Lomé</p>
+<h1>SAINT-MICHEL</h1>
+<p>Hôtel à Lomé</p>
 <hr>
-<p>Réservation de <b id="chb">-</b> chambre(s)</p>
-<p class="price"><span id="pr">0</span> FCFA</p>
-<p>Paiement sécurisé par Flooz</p>
-<a class="btn" id="paybtn" href="#">PAYER AVEC FLOOZ<br>97 39 64 79</a>
-<p style="font-size:12px;margin-top:15px;color:#64748b">Après paiement, envoyez la capture sur WhatsApp</p>
+<h3>Détails de la réservation</h3>
+<p><span id="chb">1</span> chambre(s)</p>
+<div class="price"><span id="pr">0</span> F</div>
+<p>Montant total à payer</p>
+<hr>
+<p style="font-size:14px">Faites le dépôt Flooz / TMoney au :</p>
+<h2 style="color:#dc2626">97 39 64 79</h2>
+<a class="btn" id="call" href="tel:97396479">APPELER POUR PAYER</a>
+<a class="btn2" href="https://wa.me/22897396479">ENVOYER PREUVE SUR WHATSAPP</a>
+<p style="font-size:11px;margin-top:15px;color:gray">Votre chambre est bloquée après réception du paiement</p>
 </div>
 <script>
-let url=new URLSearchParams(window.location.search);
-document.getElementById('chb').innerText=url.get('chambres')||1;
-document.getElementById('pr').innerText=url.get('prix')||0;
+// Cette partie lit le lien que tu as généré
+const params = new URLSearchParams(window.location.search);
+const ch = params.get('chambres') || '1';
+const prix = params.get('prix') || '70000';
+document.getElementById('chb').innerText = ch;
+document.getElementById('pr').innerText = prix;
+document.getElementById('call').href = "tel:97396479";
 </script>
 </body>
 </html>
