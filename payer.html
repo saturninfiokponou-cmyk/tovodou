@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>SAINT-MICHEL Paiement</title>
-<style>body{font-family:Arial;background:#f1f5f9;display:flex;justify-content:center;padding:20px} .card{background:white;padding:25px;border-radius:15px;max-width:380px;width:100%;text-align:center} .price{font-size:36px;font-weight:bold;color:#1e40af} .btn{display:block;background:#2563eb;color:white;padding:16px;border-radius:10px;text-decoration:none;font-weight:bold;margin-top:15px}</style>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ADMIN SAINT-MICHEL</title>
+<style>body{font-family:Arial;background:#0f172a;display:flex;justify-content:center;padding:20px}.box{background:white;padding:25px;border-radius:15px;width:100%;max-width:400px}input{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #ccc}button{width:100%;padding:15px;background:#2563eb;color:white;border:none;border-radius:8px;font-weight:bold}</style>
 </head>
 <body>
-<div class="card">
-<h1>SAINT-MICHEL</h1>
-<p>Hotel - Lomé</p><hr>
-<p><span id="ch">1</span> Chambre(s)</p>
-<div class="price"><span id="px">70000</span> FCFA</div>
-<p>Paiement Flooz / TMoney</p>
-<h2 style="color:red">97 39 64 79</h2>
-<a class="btn" href="https://wa.me/22897396479">J'AI PAYÉ, J'ENVOIE LA PREUVE</a>
+<div class="box">
+<h2 style="text-align:center">HOTEL SAINT-MICHEL</h2>
+<input id="ch" type="number" value="1">
+<input id="prix" type="number" value="25000">
+<input id="tel" type="number" placeholder="Num client ex: 90xxxxxx">
+<button onclick="gen()">GENERER LIEN SAINT-MICHEL</button>
+<div id="res" style="margin-top:15px;word-break:break-all"></div>
 </div>
 <script>
-let u=new URLSearchParams(window.location.search);
-document.getElementById('ch').innerText=u.get('chambres')||1;
-document.getElementById('px').innerText=u.get('prix')||70000;
+function gen(){
+let c=document.getElementById('ch').value;
+let p=document.getElementById('prix').value;
+let t=document.getElementById('tel').value;
+// LIEN PROPRE SANS tel dedans
+let lien="https://tovodou.onrender.com/payer.html?chambres="+c+"&prix="+p;
+let msg="Bonjour, voici votre lien de paiement SAINT-MICHEL: "+lien+" Montant: "+p+" FCFA. Payez sur Flooz 97 39 64 79 et envoyez la preuve ici. Merci!";
+let wa="https://wa.me/228"+t+"?text="+encodeURIComponent(msg);
+document.getElementById('res').innerHTML="Lien propre:<br>"+lien+"<br><br><a href='"+wa+"' target='_blank'><button>ENVOYER SUR WHATSAPP</button></a>";
+}
 </script>
 </body>
 </html>
